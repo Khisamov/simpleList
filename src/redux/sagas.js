@@ -1,4 +1,5 @@
 import {takeEvery, call, put, select, takeLatest} from 'redux-saga/effects';
+import {Alert} from 'react-native';
 import {FETCH_LIST, FETCH_LIST_PAGE} from './reducers';
 import {
   fetchListFulfilled,
@@ -9,7 +10,6 @@ import {
   fetchPageError,
 } from './actions';
 import store from '../app/configureStore';
-import {Alert} from 'react-native';
 
 const url = page => `https://reqres.in/api/users?page=${page}`;
 

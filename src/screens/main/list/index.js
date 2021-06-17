@@ -1,11 +1,7 @@
 // @flow
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {
-  StyleSheet,
-  ActivityIndicator,
-  FlatList,
-} from 'react-native';
+import {StyleSheet, ActivityIndicator, FlatList} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {fetchList, fetchPage} from '../../../redux/actions';
 import ListItem from './components/ListItem';
