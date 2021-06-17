@@ -8,7 +8,6 @@ function* loadListFlow() {
   try {
     const response = yield call(fetch, url(1), {method: 'GET'});
     const responseBody = yield response.json();
-    console.log(responseBody);
     if (!responseBody?.data) {
       throw 'error';
     }

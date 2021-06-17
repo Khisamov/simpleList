@@ -24,7 +24,7 @@ type Props = {
 const helloText = `
   Привет!
   Это тестовое задание с выводом списка полученного из сети.
-  Используется: redux-saga, react-navigation
+  Используется: redux-saga, react-navigation, FastImage
   `;
 
 const LoginScreen = ({next}: Props) => {
