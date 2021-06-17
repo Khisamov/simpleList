@@ -1,4 +1,4 @@
-import {takeEvery, call, put, select} from 'redux-saga/effects';
+import {takeEvery, call, put, select, takeLatest} from 'redux-saga/effects';
 import {FETCH_LIST, FETCH_LIST_PAGE} from './reducers';
 import {fetchListFulfilled, fetchPageFulfilled} from './actions';
 
@@ -35,5 +35,5 @@ function* loadPageFlow() {
 
 export default function* mySaga() {
   yield takeEvery([FETCH_LIST], loadListFlow);
-  yield takeEvery([FETCH_LIST_PAGE], loadPageFlow);
+  yield takeLatest([FETCH_LIST_PAGE], loadPageFlow);
 }
