@@ -1,8 +1,35 @@
 import {takeEvery, call, put, select, takeLatest} from 'redux-saga/effects';
 import {FETCH_LIST, FETCH_LIST_PAGE} from './reducers';
-import {fetchListFulfilled, fetchPageFulfilled} from './actions';
+import {
+  fetchListFulfilled,
+  fetchPageFulfilled,
+  fetchList,
+  fetchPage,
+  fetchListError,
+  fetchPageError,
+} from './actions';
+import store from '../app/configureStore';
+import {Alert} from 'react-native';
 
 const url = page => `https://reqres.in/api/users?page=${page}`;
+
+const alertError = func =>
+  Alert.alert(
+    'Произошла ошибка',
+    'Ошибка при отправке запроса. Повторите попытку отправки',
+    [
+      {
+        text: 'Повторить',
+        onPress: () => store.dispatch(func()),
+      },
+      {
+        text: 'Отмена',
+        onPress: () => {},
+        style: 'cancel',
+      },
+    ],
+    {cancelable: false},
+  );
 
 function* loadListFlow() {
   try {
@@ -13,7 +40,8 @@ function* loadListFlow() {
     }
     yield put(fetchListFulfilled(responseBody.data));
   } catch (err) {
-    console.warn('Ошибка загрузки списка');
+    alertError(fetchList);
+    yield put(fetchListError());
   }
 }
 
@@ -28,7 +56,8 @@ function* loadPageFlow() {
 
     yield put(fetchPageFulfilled(responseBody.data));
   } catch (err) {
-    console.warn('Ошибка загрузки новой страницы списка');
+    alertError(fetchPage);
+    yield put(fetchPageError());
   }
 }
 

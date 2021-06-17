@@ -17,7 +17,9 @@ const initialState: ReducerState = {
 export const LOGGED_IN = 'LOGGED_IN';
 export const FETCH_LIST = 'FETCH_LIST';
 export const FETCH_LIST_FULFILLED = 'FETCH_LIST_FULFILLED';
+export const FETCH_LIST_ERROR = 'FETCH_LIST_ERROR';
 export const FETCH_LIST_PAGE = 'FETCH_LIST_PAGE';
+export const FETCH_LIST_PAGE_ERROR = 'FETCH_LIST_PAGE_ERROR';
 export const FETCH_LIST_PAGE_FULFILLED = 'FETCH_LIST_PAGE_FULFILLED';
 
 export default function myReducer(
@@ -55,6 +57,14 @@ export default function myReducer(
         isLoadingPage: initialState.isLoadingPage,
         list: [...state.list, ...action.payload],
         page: state.page + 1,
+      };
+    }
+    case FETCH_LIST_ERROR:
+    case FETCH_LIST_PAGE_ERROR: {
+      return {
+        ...state,
+        isLoadingPage: initialState.isLoadingPage,
+        isLoading: initialState.isLoading,
       };
     }
     default:
